@@ -1,4 +1,4 @@
-# Rent a Car
+# Dost Rent a Car
 
 Multilingual rent-a-car website, admin panel and public REST API (web + future mobile app).
 
@@ -17,6 +17,17 @@ pnpm dev                           # http://localhost:3050
 ```
 
 Checks: `pnpm lint && pnpm typecheck && pnpm test`
+
+Content for a fresh database: `pnpm --filter @rent/web demo:setup` (seed, company profile, legal pages, FAQs, vehicle texts and photos, demo login in `apps/web/.demo-credentials`).
+
+## Demo deployment (Vercel)
+
+1. **Project:** import the repo in Vercel, Root Directory `apps/web`, Build Command `pnpm run ci` (runs migrations, then `next build`).
+2. **Storage:** in the project's Storage tab add a Postgres database (Neon) and a Blob store; Vercel sets `DATABASE_URL`/`POSTGRES_URL` and `BLOB_READ_WRITE_TOKEN`. Use the pooled connection string as `DATABASE_URL`.
+3. **Environment variables:** `PAYLOAD_SECRET` (`openssl rand -hex 32`), `NEXT_PUBLIC_SERVER_URL` (the deployment URL), `JOBS_AUTORUN=false` (serverless functions can't run the in-process job queue; scheduled jobs need a long-running server or a cron trigger in production).
+4. **Data:** from `apps/web`, with the same `DATABASE_URL`, `BLOB_READ_WRITE_TOKEN`, `PAYLOAD_SECRET` and `NEXT_PUBLIC_SERVER_URL` in the environment, run `pnpm demo:setup`.
+
+Limits on Vercel: request bodies are capped at 4.5 MB (handover photos are resized in the browser but many at once can exceed it), and background jobs (emails, exchange rates, reminders) do not run. For production a long-running server (VPS/Docker) is recommended.
 
 ## Data model
 
