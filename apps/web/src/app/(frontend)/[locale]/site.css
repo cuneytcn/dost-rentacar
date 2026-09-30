@@ -1,0 +1,155 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@source '../../../components';
+@source '../../../features/site';
+
+/* Light-only site: shadcn `dark:` styles must never follow the OS setting here. */
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-manrope);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-brand-50: #f1f6fd;
+  --color-brand-100: #e1ecfa;
+  --color-brand-200: #c5d9f4;
+  --color-brand-300: #93b9e8;
+  --color-brand-400: #5a93d8;
+  --color-brand-500: #2f6fc0;
+  --color-brand-600: #1f569f;
+  --color-brand-700: #1a4582;
+  --color-brand-800: #16386a;
+  --color-brand-900: #0f2649;
+  --color-brand-950: #0a1830;
+  --color-surface: var(--surface);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 16px);
+}
+
+/* The public site is light only: brand navy on white, soft blue-grey surfaces between sections. */
+:root {
+  --radius: 0.75rem;
+  --background: #ffffff;
+  --foreground: #0f1b2d;
+  --card: #ffffff;
+  --card-foreground: #0f1b2d;
+  --popover: #ffffff;
+  --popover-foreground: #0f1b2d;
+  --primary: #1a4582;
+  --primary-foreground: #ffffff;
+  --secondary: #eef3fa;
+  --secondary-foreground: #16386a;
+  --muted: #f3f6fa;
+  --muted-foreground: #5b6b82;
+  --accent: #eef3fa;
+  --accent-foreground: #16386a;
+  --destructive: #d23b3b;
+  --border: #e3e9f1;
+  --input: #d7dfea;
+  --ring: #5a93d8;
+  --success: #1f8a58;
+  --warning: #b86e00;
+  --surface: #f5f8fc;
+  color-scheme: light;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: 'ss01';
+  }
+  h1,
+  h2,
+  h3 {
+    @apply tracking-tight text-balance;
+  }
+}
+
+@utility container-site {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Rich text from the CMS (pages, FAQ answers). */
+@utility prose-site {
+  color: var(--foreground);
+  line-height: 1.75;
+  & > * + * {
+    margin-top: 1em;
+  }
+  & h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2em;
+    color: var(--color-brand-900);
+  }
+  & h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 1.6em;
+    color: var(--color-brand-900);
+  }
+  & a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  & ul {
+    list-style: disc;
+    padding-left: 1.4em;
+  }
+  & ol {
+    list-style: decimal;
+    padding-left: 1.4em;
+  }
+  & li + li {
+    margin-top: 0.35em;
+  }
+  & blockquote {
+    border-left: 3px solid var(--color-brand-200);
+    padding-left: 1em;
+    color: var(--muted-foreground);
+  }
+  & strong {
+    font-weight: 700;
+  }
+}

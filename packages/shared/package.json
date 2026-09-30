@@ -1,0 +1,23 @@
+{
+  "name": "@rent/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./constants": "./src/constants.ts",
+    "./money": "./src/money.ts",
+    "./opening-hours": "./src/opening-hours.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "zod": "^4.6.0"
+  },
+  "devDependencies": {
+    "typescript": "5.7.3",
+    "vitest": "4.0.18"
+  }
+}
