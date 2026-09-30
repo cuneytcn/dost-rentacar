@@ -116,6 +116,8 @@ export default buildConfig({
     // Files are still served through Payload (/api/<collection>/file/…), so access control on documents holds.
     vercelBlobStorage({
       enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+      // Same DB schema with or without a token, so one set of migrations fits local and Vercel.
+      alwaysInsertFields: true,
       collections: { media: true, documents: true },
       token: process.env.BLOB_READ_WRITE_TOKEN,
     }),
