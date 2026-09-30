@@ -12,3 +12,6 @@ coverage
 /apps/web/documents
 *.tsbuildinfo
 .demo-credentials
+.vercel
+.env*
+!.env.example
